@@ -1,0 +1,29 @@
+name: node challenger
+on: 
+  pull_request: 
+    branches: 
+      - main
+
+jobs:
+  check-application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: install node dependecies
+        run: npm i
+
+      - name: execute node application
+        run: npm start
+
+      - name: execute test coverage
+        run: npm test
+      
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
