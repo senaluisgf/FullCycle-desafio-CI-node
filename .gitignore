@@ -1,0 +1,8 @@
+# ignoring node auto generate files
+node_modules
+
+# ignoring test coverage files
+coverage
+
+# ignorin sonar scanner files
+.scannerwork
